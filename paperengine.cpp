@@ -3,6 +3,7 @@
 #include "paperengine/direct3d.hpp"
 #include "paperengine/d3ddev.hpp"
 #include "paperengine/d3dfont.hpp"
+#include "paperengine/sprite.hpp"
 
 #pragma comment(lib, "dxguid.lib")
 #pragma comment(lib, "d3dx9.lib")
@@ -22,6 +23,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCm
 	w.show();
 
 	d3dfont text(d);
+	sprite s(d, "nagato.bmp");
 
 	MSG msg;
 	do
@@ -36,6 +38,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCm
 			d.begin();
 
 			text.render("Hello world.");
+			s.render();
 
 			d.end();
 			d.present();
