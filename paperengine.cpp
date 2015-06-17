@@ -1,5 +1,6 @@
 #include "paperengine/window_class.hpp"
 #include "paperengine/window.hpp"
+#include "paperengine/direct3d.hpp"
 
 #pragma comment(lib, "dxguid.lib")
 #pragma comment(lib, "d3d9.lib")
@@ -17,10 +18,9 @@ int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCm
 	window w(wc.atom, "Paperengine", 640, 480);
 	HWND hWnd = w.hWnd;
 
-	LPDIRECT3D9 g_pD3D;
-	LPDIRECT3DDEVICE9 g_pD3DDev;
-	if( !(g_pD3D = Direct3DCreate9( D3D_SDK_VERSION )) ) return 0;
+	direct3d d;
 
+	LPDIRECT3DDEVICE9 g_pD3DDev;
 	D3DPRESENT_PARAMETERS d3dpp = {640,480,D3DFMT_UNKNOWN,0,D3DMULTISAMPLE_NONE,0,
 											D3DSWAPEFFECT_DISCARD,NULL,TRUE,TRUE,D3DFMT_D24S8,0,0}; 
 
