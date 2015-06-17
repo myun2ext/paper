@@ -2,6 +2,7 @@
 #include "paperengine/window.hpp"
 #include "paperengine/direct3d.hpp"
 #include "paperengine/d3ddev.hpp"
+#include "paperengine/d3dfont.hpp"
 
 #pragma comment(lib, "dxguid.lib")
 #pragma comment(lib, "d3dx9.lib")
@@ -20,14 +21,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCm
 	d3ddev d(d3d, hWnd, 640, 480);
 	w.show();
 
-	int fontsize = 24;
-	D3DXFONT_DESC lf = {fontsize, 0, 0, 1, 0, SHIFTJIS_CHARSET, OUT_TT_ONLY_PRECIS,
-								PROOF_QUALITY, FIXED_PITCH | FF_MODERN, _T("MS Gothic")};
-
-	LPD3DXFONT pD3DFont;
-	if(FAILED(D3DXCreateFontIndirect(d.ptr, &lf, &pD3DFont))){
-		return 0;
-	}
+	d3dfont text(d);
 
 	MSG msg;
 	do
@@ -41,8 +35,7 @@ int APIENTRY _tWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCm
 			d.clear();
 			d.begin();
 
-			RECT r={0,0,0,0};
-			pD3DFont->DrawText(NULL, _T("Hello World !"), -1, &r, DT_LEFT | DT_SINGLELINE | DT_NOCLIP, 0xffffffff);
+			text.render("Hello world.");
 
 			d.end();
 			d.present();
