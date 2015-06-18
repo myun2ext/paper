@@ -34,8 +34,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdL
 				up+=12;
 			else
 				up-=8;
-			unsigned char up_sin = sin(up / 2 * M_PI / 255.0) * 255;
-			d.clear(0xff000000 + up_sin);
+			d.clear(0xff000000 + ease(up, 255));
 			d.begin();
 
 			d.end();

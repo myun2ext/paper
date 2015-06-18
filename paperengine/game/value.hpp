@@ -1,6 +1,8 @@
 #ifndef __MYUN2_GITHUB_COM__PAPER_ENGINE__VALUE_HPP__
 #define __MYUN2_GITHUB_COM__PAPER_ENGINE__VALUE_HPP__
 
+#include <math.h>
+
 namespace myun2
 {
 	namespace paperengine
@@ -27,6 +29,9 @@ namespace myun2
 			operator const T&() const { return v; }
 		};
 		typedef limited<int, 0, 255> limited_uchar;
+
+		template <typename T, typename MaxT>
+		T ease(const T& v, const MaxT& max) { return sin(v * M_PI / 2 / max) * max; }
 	}
 }
 
