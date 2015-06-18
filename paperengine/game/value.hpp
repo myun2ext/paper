@@ -14,14 +14,14 @@ namespace myun2
 			limited() : v(Min){}
 			limited(const T& v_in) : v(v_in){}
 
-			limited& operator ++(int){ v++; l(); return *this; }
-			limited& operator --(int){ v--; l(); return *this; }
+/*			limited& operator ++(T){ v++; l(); return *this; }
+			limited& operator --(T){ v--; l(); return *this; }
 			limited& operator ++(){ limited work=*this; v++; l(); return work; }
-			limited& operator --(){ limited work=*this; v--; l(); return work; }
-			limited& operator +=(int n){ v+=n; l(); return *this; }
-			limited& operator -=(int n){ v-=n; l(); return *this; }
-			limited& operator +(int n){ limited work=*this; work+=n; l(); return work; }
-			limited& operator -(int n){ limited work=*this; work-=n; l(); return work; }
+			limited& operator --(){ limited work=*this; v--; l(); return work; }*/
+			limited& operator +=(const T& v_in){ v+=v_in; l(); return *this; }
+			limited& operator -=(const T& v_in){ v-=v_in; l(); return *this; }
+			limited& operator +(const T& v_in){ limited work=*this; work+=v_in; l(); return work; }
+			limited& operator -(const T& v_in){ limited work=*this; work-=v_in; l(); return work; }
 			void l() {
 				if (v<Min) v = Min;
 				if (v>Max) v = Max;

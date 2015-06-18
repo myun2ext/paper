@@ -34,7 +34,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdL
 				i.up();
 			else
 				i.down();
-			d.clear(0xff000000 + ease(i) * 255);
+			d.clear(0xff000000 + (unsigned char)(ease(i) * 255));
 			d.begin();
 
 			d.end();
