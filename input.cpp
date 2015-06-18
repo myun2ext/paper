@@ -3,6 +3,7 @@
 #include "paperengine/d3ddev.hpp"
 #include "paperengine/input.hpp"
 #include "paperengine/game/value.hpp"
+#include <math.h>
 
 using namespace myun2::paperengine;
 
@@ -32,8 +33,9 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdL
 			if (kb.test(DIK_UP))
 				up+=12;
 			else
-				up-=4;
-			d.clear(0xff000000 + up);
+				up-=8;
+			unsigned char up_sin = sin(up / 2 * M_PI / 255.0) * 255;
+			d.clear(0xff000000 + up_sin);
 			d.begin();
 
 			d.end();
