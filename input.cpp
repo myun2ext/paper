@@ -17,6 +17,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdL
 	dinput di(hInstance);
 	kb_input kb(di, hwnd);
 
+	unsigned char up = 0;
 	MSG msg;
 	do
 	{
@@ -26,7 +27,12 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdL
 		}
 		else
 		{
-			d.clear(0xff0000ff);
+			kb.update();
+			if (kb.test(DIK_UP))
+				up+=10;
+			else
+				up = 0;
+			d.clear(0xff000000 + up);
 			d.begin();
 
 			d.end();
