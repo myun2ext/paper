@@ -2,6 +2,7 @@
 #include "paperengine/window.hpp"
 #include "paperengine/d3ddev.hpp"
 #include "paperengine/input.hpp"
+#include "paperengine/game/value.hpp"
 
 using namespace myun2::paperengine;
 
@@ -17,7 +18,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdL
 	dinput di(hInstance);
 	kb_input kb(di, hwnd);
 
-	unsigned char up = 0;
+	limited_uchar up = 0;
 	MSG msg;
 	do
 	{
@@ -29,9 +30,9 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdL
 		{
 			kb.update();
 			if (kb.test(DIK_UP))
-				up+=10;
+				up+=12;
 			else
-				up = 0;
+				up-=4;
 			d.clear(0xff000000 + up);
 			d.begin();
 
