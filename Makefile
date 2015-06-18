@@ -6,4 +6,4 @@ all:
 simple:
 	g++ -I$(DX_INCLUDE) -L$(DX_LIB) simple.cpp -ld3d9 -Wl,-subsystem,windows
 input:
-	g++ -I$(DX_INCLUDE) -L$(DX_LIB) input.cpp -ld3d9 -ldinput8 -Wl,-subsystem,windows
+	g++ -I$(DX_INCLUDE) -L$(DX_LIB) input.cpp -ld3d9 -ldinput8 -ldxguid -Wl,-subsystem,windows

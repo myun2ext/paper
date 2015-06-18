@@ -12,7 +12,7 @@ namespace myun2
 		class dinput : public auto_interface<LPDIRECTINPUT8>
 		{
 		public:
-			dinput(HINSTANCE hInstance)
+			dinput(HINSTANCE hInstance = NULL)
 			{
 				if ( FAILED(DirectInput8Create(hInstance,
 					DIRECTINPUT_VERSION, IID_IDirectInput8, (LPVOID*)&ptr, NULL)) )
