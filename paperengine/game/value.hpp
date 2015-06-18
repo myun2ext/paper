@@ -7,7 +7,7 @@ namespace myun2
 {
 	namespace paperengine
 	{
-		template <typename T, T Min, T Max>
+		template <typename T, long Min, long Max>
 		struct limited
 		{
 			T v;
@@ -29,9 +29,25 @@ namespace myun2
 			operator const T&() const { return v; }
 		};
 		typedef limited<int, 0, 255> limited_uchar;
+		typedef limited<float, 0, 1> limited_float;
 
-		template <typename T, typename MaxT>
-		T ease(const T& v, const MaxT& max) { return sin(v * M_PI / 2 / max) * max; }
+		template <typename T>
+		T ease(const T& v, double max = 1) { return sin(v * M_PI / 2 / max) * max; }
+
+		/////////////////////////////////
+
+		struct inertia : limited_float
+		{
+			inertia(){}
+			inertia(const float& v_in) : limited_float(v_in){}
+
+			void up(float acceleration = 0.05f) {
+				operator +=(acceleration);
+			}
+			void down(float attenuation = 0.01f) {
+				operator -=(attenuation);
+			}
+		};
 	}
 }
 

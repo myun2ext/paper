@@ -19,7 +19,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdL
 	dinput di(hInstance);
 	kb_input kb(di, hwnd);
 
-	limited_uchar up = 0;
+	inertia i = 0;
 	MSG msg;
 	do
 	{
@@ -31,10 +31,10 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdL
 		{
 			kb.update();
 			if (kb.test(DIK_UP))
-				up+=12;
+				i.up();
 			else
-				up-=8;
-			d.clear(0xff000000 + ease(up, 255));
+				i.down();
+			d.clear(0xff000000 + ease(i) * 255);
 			d.begin();
 
 			d.end();
