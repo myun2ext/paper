@@ -36,16 +36,19 @@ namespace myun2
 
 		/////////////////////////////////
 
-		struct inertia : limited_float
+		struct inertia : limited<float, -1, 1> //limited_float
 		{
 			inertia(){}
-			inertia(const float& v_in) : limited_float(v_in){}
+			inertia(const float& v_in) : limited<float, -1, 1>(v_in){}
 
 			void up(float acceleration = 0.05f) {
 				operator +=(acceleration);
 			}
 			void down(float attenuation = 0.01f) {
-				operator -=(attenuation);
+				if ( v < 0 )
+					operator +=(attenuation);
+				else
+					operator -=(attenuation);
 			}
 		};
 	}

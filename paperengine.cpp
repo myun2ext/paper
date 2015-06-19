@@ -8,11 +8,12 @@ public:
 	d3ddev &d;
 	kb_input &kb;
 	sprite img1;
-	int x;
+	inertia ix, iy;
+	float x, y;
 
 	renderer(d3ddev &d_in, kb_input &kb_in)
 		: d(d_in), kb(kb_in),
-		  img1(d, "nagato.bmp") { x = 0; }
+		  img1(d, "nagato.bmp") { x = y = 0; }
 
 	void render()
 	{
@@ -20,9 +21,13 @@ public:
 			x -= 1;
 		if ( kb.test(DIK_RIGHT) )
 			x += 1;
+		if ( kb.test(DIK_UP) )
+			y -= 1;
+		if ( kb.test(DIK_DOWN) )
+			y += 1;
 		
 		d.clear(0xff000033);
-		img1.render(x);
+		img1.render(x, y);
 	}
 };
 
