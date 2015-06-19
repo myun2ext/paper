@@ -7,6 +7,8 @@
 #include "d3ddev.hpp"
 #include "d3dfont.hpp"
 #include "sprite.hpp"
+#include "input.hpp"
+#include "game/value.hpp"
 #include <string>
 
 namespace myun2
@@ -30,13 +32,17 @@ namespace myun2
 			direct3d d3d;
 			d3ddev d;
 			_Renderer r;
+			dinput di;
+			kb_input kb;
 
 			app(const char* name, HINSTANCE hinstance, unsigned int width, unsigned int height)
 				: wc((::std::string(name) + "__WindowClass__").c_str()),
 				  w(wc.atom, name, width, height),
 				  hwnd(w.hWnd),
 				  d(d3d, hwnd, width, height),
-				  r(d)
+				  di(hinstance),
+				  kb(di, hwnd),
+				  r(d, kb)
 			{
 				w.show();
 			}
@@ -51,6 +57,7 @@ namespace myun2
 					}
 					else
 					{
+						kb.update();
 						d.begin();
 						r.render();
 						d.end();
