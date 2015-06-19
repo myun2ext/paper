@@ -7,7 +7,8 @@ struct renderer
 public:
 	d3ddev &d;
 	kb_input &kb;
-	sprite img1;
+	sprite point1;
+	sprite point2;
 	inertia<-3, 3> ix;
 	inertia<0, 12>  iy;
 	limited<float, 0, 608> x;
@@ -15,7 +16,8 @@ public:
 
 	renderer(d3ddev &d_in, kb_input &kb_in)
 		: d(d_in), kb(kb_in),
-		  img1(d, "point.bmp")
+		  point1(d, "point.png"),
+		  point2(d, "point2.png")
 	{
 		x = 0; y = 0;
 	}
@@ -42,7 +44,7 @@ public:
 			iy = 6;
 
 		d.clear(0xff000033);
-		img1.render(x, 446 - y);
+		point1.render(x, 446 - y);
 	}
 };
 
