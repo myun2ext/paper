@@ -19,7 +19,7 @@ namespace myun2
 					throw create_failed();
 			}
 			void set_data_format(LPCDIDATAFORMAT fmt) {
-				if ( FAILED(ptr->SetDataFormat(&c_dfDIKeyboard)) )
+				if ( FAILED(ptr->SetDataFormat(fmt)) )
 					throw set_data_format_failed();
 			}
 			void set_cooperative_level(HWND hwnd, DWORD level_flags) {
@@ -60,6 +60,8 @@ namespace myun2
 		class mouse_input : public dinput_device
 		{
 		public:
+			struct mouse_set_property_failed{};
+
 			DIMOUSESTATE2 states;
 			mouse_input(dinput& di, HWND hwnd) : dinput_device(di, GUID_SysMouse)
 			{
@@ -72,15 +74,15 @@ namespace myun2
 				diprop.diph.dwObj = 0;
 				diprop.diph.dwHow = DIPH_DEVICE;
 				diprop.dwData = DIPROPAXISMODE_REL;
-				ptr->SetProperty(DIPROP_AXISMODE, &diprop.diph);
+				if (FAILED(ptr->SetProperty(DIPROP_AXISMODE, &diprop.diph)))
+					throw mouse_set_property_failed();
+				acquire();
 			}
 			void update()
 			{
-				if (FAILED(get_status(&states, sizeof(states))) )
-				{
+				ZeroMemory(&states, sizeof(states));
+				if ( get_status(&states, sizeof(states)) == DIERR_INPUTLOST )
 					acquire();
-					get_status(&states, sizeof(states));
-				}
 			}
 			long x() const { return states.lX; }
 			long y() const { return states.lY; }
