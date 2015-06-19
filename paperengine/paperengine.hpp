@@ -13,6 +13,14 @@ namespace myun2
 {
 	namespace paperengine
 	{
+		struct renderer_base {
+		/*private:
+			d3ddev d;
+		public:
+			renderer_base(d3ddev d_in) : d(d_in){}*/
+			virtual void render(d3ddev &d) =0;
+		};
+		template <typename _Renderer>
 		class app
 		{
 		public:
@@ -21,6 +29,7 @@ namespace myun2
 			HWND hwnd;
 			direct3d d3d;
 			d3ddev d;
+			_Renderer r;
 
 			app(const char* name, HINSTANCE hinstance, unsigned int width, unsigned int height)
 				: wc((::std::string(name) + "__WindowClass__").c_str()),
@@ -41,8 +50,8 @@ namespace myun2
 					}
 					else
 					{
-						d.clear();
 						d.begin();
+						r.render(d);
 						d.end();
 						d.present();
 					}
@@ -53,9 +62,9 @@ namespace myun2
 	}
 }
 
-#define RUN_PAPERENGINE(NAME, WIDTH, HEIGHT)	\
+#define RUN_PAPERENGINE(NAME, WIDTH, HEIGHT, RENDERER)	\
 	int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPTSTR lpCmdLine, int nCmdShow) {	\
-		::myun2::paperengine::app a(NAME, hInstance, WIDTH, HEIGHT);	\
+		::myun2::paperengine::app<RENDERER> a(NAME, hInstance, WIDTH, HEIGHT);	\
 		return a.message_loop();	\
 	}
 

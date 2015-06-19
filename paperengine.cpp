@@ -1,3 +1,13 @@
 #include "paperengine/paperengine.hpp"
 
-RUN_PAPERENGINE("Paperengine", 800, 600)
+using namespace myun2::paperengine;
+
+struct renderer
+{
+	void render(d3ddev &d)
+	{
+		d.clear(0xff000033);
+	}
+};
+
+RUN_PAPERENGINE("Paperengine", 640, 480, renderer)
