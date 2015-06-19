@@ -10,8 +10,8 @@ public:
 	sprite img1;
 	inertia<-3, 3> ix;
 	inertia<0, 12>  iy;
-	limited<float, 0, 600> x;
-	limited<float, 0, 440> y;
+	limited<float, 0, 608> x;
+	limited<float, 0, 446> y;
 
 	renderer(d3ddev &d_in, kb_input &kb_in)
 		: d(d_in), kb(kb_in),
@@ -24,9 +24,9 @@ public:
 	{
 		ix.attenuate(0.05f);
 		if ( kb.test(DIK_LEFT) || kb.test(DIK_A) )
-			ix.increase(-0.1f);
+			ix.increase(-0.12f);
 		if ( kb.test(DIK_RIGHT) || kb.test(DIK_D) )
-			ix.increase(0.1f);
+			ix.increase(0.12f);
 		x += ix;
 
 		iy.attenuate(0.1f);
@@ -38,11 +38,11 @@ public:
 		if ( kb.test(DIK_DOWN) || kb.test(DIK_S) )
 			iy.increase(-0.1f);
 		y -= (6 - iy);
-		if ( y == 440 )
+		if ( y == 446 )
 			iy = 6;
 
 		d.clear(0xff000033);
-		img1.render(x, 440 - y);
+		img1.render(x, 446 - y);
 	}
 };
 
