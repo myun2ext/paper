@@ -57,11 +57,11 @@ namespace myun2
 			}
 		};
 
-		class mouse : public dinput_device
+		class mouse_input : public dinput_device
 		{
 		public:
 			DIMOUSESTATE2 states;
-			mouse(dinput& di, HWND hwnd) : dinput_device(di, GUID_SysMouse)
+			mouse_input(dinput& di, HWND hwnd) : dinput_device(di, GUID_SysMouse)
 			{
 				set_data_format(&c_dfDIMouse2);
 				set_cooperative_level(hwnd, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE | DISCL_NOWINKEY);

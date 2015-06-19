@@ -7,6 +7,7 @@ struct renderer
 public:
 	d3ddev &d;
 	kb_input &kb;
+	mouse_input &mouse;
 	sprite point1;
 	sprite point2;
 	inertia<-3, 3> ix;
@@ -14,8 +15,8 @@ public:
 	limited<float, 0, 608> x;
 	limited<float, 0, 446> y;
 
-	renderer(d3ddev &d_in, kb_input &kb_in)
-		: d(d_in), kb(kb_in),
+	renderer(d3ddev &d_in, kb_input &kb_in, mouse_input &mouse_in)
+		: d(d_in), kb(kb_in), mouse(mouse_in),
 		  point1(d, "point.png"),
 		  point2(d, "point2.png")
 	{

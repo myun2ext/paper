@@ -31,9 +31,10 @@ namespace myun2
 			HWND hwnd;
 			direct3d d3d;
 			d3ddev d;
-			_Renderer r;
 			dinput di;
 			kb_input kb;
+			mouse_input mouse;
+			_Renderer r;
 
 			app(const char* name, HINSTANCE hinstance, unsigned int width, unsigned int height)
 				: wc((::std::string(name) + "__WindowClass__").c_str()),
@@ -42,7 +43,8 @@ namespace myun2
 				  d(d3d, hwnd, width, height),
 				  di(hinstance),
 				  kb(di, hwnd),
-				  r(d, kb)
+				  mouse(di, hwnd),
+				  r(d, kb, mouse)
 			{
 				w.show();
 			}
