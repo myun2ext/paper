@@ -46,11 +46,16 @@ namespace myun2
 			void increase(float value = 0.05f) {
 				_Super::operator +=(value);
 			}
-			void attenuate(float value = 0.01f) {
-				if ( _Super::v < 0 )
+			void attenuate(float value = 0.01f)
+			{
+				if ( _Super::v < 0 ) {
 					_Super::operator +=(value);
-				else
+					if ( _Super::v > 0 ) _Super::v = 0;
+				}
+				else {
 					_Super::operator -=(value);
+					if ( _Super::v < 0 ) _Super::v = 0;
+				}
 			}
 		};
 	}
