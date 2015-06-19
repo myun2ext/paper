@@ -40,7 +40,7 @@ namespace myun2
 		struct inertia : limited<float, Min, Max> //limited_float
 		{
 			typedef limited<float, Min, Max> _Super;
-			inertia(){}
+			inertia():_Super(0){}
 			inertia(const float& v_in) : _Super(v_in){}
 
 			void increase(float value = 0.05f) {
