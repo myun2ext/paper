@@ -13,10 +13,23 @@ namespace myun2
 		class texture : public auto_interface<LPDIRECT3DTEXTURE9>
 		{
 		public:
+			D3DSURFACE_DESC desc;
+			UINT width;
+			UINT height;
+
 			texture(d3ddev& d, const char* file_name)
 			{
 				if ( FAILED(D3DXCreateTextureFromFile(d.ptr, file_name, &ptr)) )
 					throw create_failed();
+				read_desc();
+			}
+			bool read_desc()
+			{
+				if( FAILED(ptr->GetLevelDesc( 0, &desc ) ))
+					return false;
+				width = desc.Width;
+				height = desc.Height;
+				return true;
 			}
 		};
 	}
