@@ -64,8 +64,8 @@ namespace myun2
 			mouse_input(dinput& di, HWND hwnd) : dinput_device(di, GUID_SysMouse)
 			{
 				set_data_format(&c_dfDIMouse2);
-				set_cooperative_level(hwnd, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE | DISCL_NOWINKEY);
-				
+				set_cooperative_level(hwnd, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE);
+
 				DIPROPDWORD diprop;
 				diprop.diph.dwSize = sizeof(diprop);
 				diprop.diph.dwHeaderSize = sizeof(diprop.diph);

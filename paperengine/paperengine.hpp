@@ -60,6 +60,7 @@ namespace myun2
 					else
 					{
 						kb.update();
+						mouse.update();
 						d.begin();
 						r.render();
 						d.end();
