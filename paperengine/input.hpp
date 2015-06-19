@@ -56,6 +56,39 @@ namespace myun2
 				return state_buff[dik_code] & 0x80;
 			}
 		};
+
+		class mouse : public dinput_device
+		{
+		public:
+			DIMOUSESTATE2 states;
+			mouse(dinput& di, HWND hwnd) : dinput_device(di, GUID_SysMouse)
+			{
+				set_data_format(&c_dfDIMouse2);
+				set_cooperative_level(hwnd, DISCL_FOREGROUND | DISCL_NONEXCLUSIVE | DISCL_NOWINKEY);
+				
+				DIPROPDWORD diprop;
+				diprop.diph.dwSize = sizeof(diprop);
+				diprop.diph.dwHeaderSize = sizeof(diprop.diph);
+				diprop.diph.dwObj = 0;
+				diprop.diph.dwHow = DIPH_DEVICE;
+				diprop.dwData = DIPROPAXISMODE_REL;
+				ptr->SetProperty(DIPROP_AXISMODE, &diprop.diph);
+			}
+			void update()
+			{
+				if (FAILED(get_status(&states, sizeof(states))) )
+				{
+					acquire();
+					get_status(&states, sizeof(states));
+				}
+			}
+			long x() const { return states.lX; }
+			long y() const { return states.lY; }
+			long scroll() const { return states.lZ; }
+			bool clicked() const { return states.rgbButtons[0] & 0x80; }
+			bool rclicked() const { return states.rgbButtons[1] & 0x80; }
+			bool wheel_clicked() const { return states.rgbButtons[2] & 0x80; }
+		};
 	}
 }
 
