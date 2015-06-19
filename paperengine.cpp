@@ -52,6 +52,10 @@ struct renderer
 		if ( y == 446 )
 			iy = 6;
 
+		if ( mouse.clicked() ) {
+			point2.render(mouse.x(), mouse.y());
+		}
+
 		d.clear(0xff000033);
 		point1.render(x, 446 - y);
 	}
