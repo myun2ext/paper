@@ -1,10 +1,17 @@
 #include "paperengine/paperengine.hpp"
+#include <vector>
 
 using namespace myun2::paperengine;
+using namespace std;
 
 struct renderer
 {
-public:
+	struct enemy {
+		inertia<-3, 3> ix;
+		inertia<0, 12>  iy;
+		limited<float, -20, 640> x;
+		limited<float, -20, 480> y;
+	};
 	d3ddev &d;
 	kb_input &kb;
 	mouse_input &mouse;
@@ -14,6 +21,7 @@ public:
 	inertia<0, 12>  iy;
 	limited<float, 0, 608> x;
 	limited<float, 0, 446> y;
+	vector<enemy> enemies;
 
 	renderer(d3ddev &d_in, kb_input &kb_in, mouse_input &mouse_in)
 		: d(d_in), kb(kb_in), mouse(mouse_in),
