@@ -17,6 +17,8 @@ public:
 
 	void render()
 	{
+		ix.attenuate(); iy.attenuate();
+
 		if ( kb.test(DIK_LEFT) )
 			x -= 1;
 		if ( kb.test(DIK_RIGHT) )
@@ -25,7 +27,7 @@ public:
 			y -= 1;
 		if ( kb.test(DIK_DOWN) )
 			y += 1;
-		
+
 		d.clear(0xff000033);
 		img1.render(x, y);
 	}

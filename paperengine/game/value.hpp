@@ -44,11 +44,11 @@ namespace myun2
 			void up(float acceleration = 0.05f) {
 				operator +=(acceleration);
 			}
-			void down(float attenuation = 0.01f) {
+			void attenuate(float value = 0.01f) {
 				if ( v < 0 )
-					operator +=(attenuation);
+					operator +=(value);
 				else
-					operator -=(attenuation);
+					operator -=(value);
 			}
 		};
 	}
