@@ -20,9 +20,10 @@ public:
 		ix.attenuate(); iy.attenuate();
 
 		if ( kb.test(DIK_LEFT) )
-			x -= 1;
+			ix.increase();
 		if ( kb.test(DIK_RIGHT) )
-			x += 1;
+			ix.increase();
+		x -= ix;
 		if ( kb.test(DIK_UP) )
 			y -= 1;
 		if ( kb.test(DIK_DOWN) )
