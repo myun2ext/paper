@@ -35,7 +35,8 @@ namespace myun2
 				: wc((::std::string(name) + "__WindowClass__").c_str()),
 				  w(wc.atom, name, width, height),
 				  hwnd(w.hWnd),
-				  d(d3d, hwnd, width, height)
+				  d(d3d, hwnd, width, height),
+				  r(d)
 			{
 				w.show();
 			}
@@ -51,7 +52,7 @@ namespace myun2
 					else
 					{
 						d.begin();
-						r.render(d);
+						r.render();
 						d.end();
 						d.present();
 					}

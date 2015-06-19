@@ -29,8 +29,8 @@ namespace myun2
 
 				rc.left    = 0;
 				rc.top     = 0;
-				rc.right   = 256;
-				rc.bottom  = 256;
+				rc.right   = 9999;
+				rc.bottom  = 9999;
 				center.x   = 0;
 				center.y   = 0;
 				position.x = left;
