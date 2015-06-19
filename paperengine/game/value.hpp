@@ -36,20 +36,21 @@ namespace myun2
 
 		/////////////////////////////////
 
-		template <long Min = 0, long Max = 1>
+		template <long Min = -1, long Max = 1>
 		struct inertia : limited<float, Min, Max> //limited_float
 		{
+			typedef limited<float, Min, Max> _Super;
 			inertia(){}
-			inertia(const float& v_in) : limited<float, Min, Max>(v_in){}
+			inertia(const float& v_in) : _Super(v_in){}
 
 			void increase(float value = 0.05f) {
-				operator +=(value);
+				_Super::operator +=(value);
 			}
 			void attenuate(float value = 0.01f) {
-				if ( v < 0 )
-					operator +=(value);
+				if ( _Super::v < 0 )
+					_Super::operator +=(value);
 				else
-					operator -=(value);
+					_Super::operator -=(value);
 			}
 		};
 	}

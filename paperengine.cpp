@@ -22,8 +22,8 @@ public:
 		if ( kb.test(DIK_LEFT) )
 			ix.increase();
 		if ( kb.test(DIK_RIGHT) )
-			ix.increase();
-		x -= ix;
+			ix.increase(-0.05f);
+		x += ix;
 		if ( kb.test(DIK_UP) )
 			y -= 1;
 		if ( kb.test(DIK_DOWN) )
