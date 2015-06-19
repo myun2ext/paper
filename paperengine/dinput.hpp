@@ -1,6 +1,7 @@
 #ifndef __MYUN2_GITHUB_COM__PAPER_ENGINE__DINPUT_HPP__
 #define __MYUN2_GITHUB_COM__PAPER_ENGINE__DINPUT_HPP__
 
+#define DIRECTINPUT_VERSION	(0x0800)
 #include <dinput.h>
 #pragma comment(lib, "dinput8.lib")
 #include "auto_interface.hpp"
