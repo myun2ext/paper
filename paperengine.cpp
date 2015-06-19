@@ -23,19 +23,19 @@ public:
 	void render()
 	{
 		ix.attenuate(0.05f);
-		if ( kb.test(DIK_LEFT) )
+		if ( kb.test(DIK_LEFT) || kb.test(DIK_A) )
 			ix.increase(-0.1f);
-		if ( kb.test(DIK_RIGHT) )
+		if ( kb.test(DIK_RIGHT) || kb.test(DIK_D) )
 			ix.increase(0.1f);
 		x += ix;
 
 		iy.attenuate(0.1f);
-		if ( kb.test(DIK_UP) ) {
+		if ( kb.test(DIK_UP) || kb.test(DIK_W) ) {
 			if ( y == 0 )
 				iy = 6;
 			iy.increase(0.3f);
 		}
-		if ( kb.test(DIK_DOWN) )
+		if ( kb.test(DIK_DOWN) || kb.test(DIK_S) )
 			iy.increase(-0.1f);
 		y -= (6 - iy);
 		if ( y == 440 )
