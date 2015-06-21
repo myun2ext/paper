@@ -11,6 +11,11 @@ struct renderer
 		inertia<0, 12>  iy;
 		limited<float, -20, 640> x;
 		limited<float, -20, 480> y;
+		enemy(int x_, int y_) : x(x_), y(y_) {}
+		void next() {
+	    	ix.attenuate(0.05f);
+			iy.attenuate(0.1f);
+		}
 	};
 	d3ddev &d;
 	kb_input &kb;
@@ -23,7 +28,6 @@ struct renderer
 	limited<float, 0, 608> x;
 	limited<float, 0, 446> y;
 	vector<enemy> enemies;
-	int clickedx, clickedy;
 
 	renderer(d3ddev &d_in, kb_input &kb_in, mouse_input &mouse_in)
 		: d(d_in), kb(kb_in), mouse(mouse_in),
@@ -32,12 +36,11 @@ struct renderer
 		  txt1(d, 26, "Meiryo")
 	{
 		x = 0; y = 0;
-		txt1 = "W/A/S/D キーで移動が出来ます。";
+		txt1 = "W/A/S/D で移動";
 	}
-
 	void render()
-	{
 
+	{
     	ix.attenuate(0.05f);
 		if ( kb.test(DIK_LEFT) || kb.test(DIK_A) )
 			ix.increase(-0.12f);
@@ -57,18 +60,19 @@ struct renderer
 		if ( y == 446 )
 			iy = 6;
 
-		//if ( mouse.clicked() ) {
-			//point2.render(mouse.x(), mouse.y());
-			point2.render(clickedx, clickedy);
-		//	MessageBox(0,0,0,0);
-		//}
+		//	Render enemies
+		for (int ei=0; ei<enemies.size(); ei++)
+		{
+			enemy &e = enemies[ei];
+			point2.render(e.x, e.y);
+			e.next();
+		}
 		point1.render(x, 446 - y);
 		txt1.render();
 	}
 	void on_clicked(int x, int y)
 	{
-		clickedx = x;
-		clickedy = y;
+		enemies.push_back(enemy(x, y));
 	}
 };
 

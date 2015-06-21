@@ -20,8 +20,8 @@ namespace myun2
 			limited& operator --(){ limited work=*this; v--; l(); return work; }*/
 			limited& operator +=(const T& v_in){ v+=v_in; l(); return *this; }
 			limited& operator -=(const T& v_in){ v-=v_in; l(); return *this; }
-			limited& operator +(const T& v_in){ limited work=*this; work+=v_in; l(); return work; }
-			limited& operator -(const T& v_in){ limited work=*this; work-=v_in; l(); return work; }
+			limited operator +(const T& v_in) const { limited work=*this; work+=v_in; work.l(); return work; }
+			limited operator -(const T& v_in) const { limited work=*this; work-=v_in; work.l(); return work; }
 			void l() {
 				if (v<Min) v = Min;
 				if (v>Max) v = Max;
