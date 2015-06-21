@@ -52,7 +52,6 @@ struct renderer
 		if ( y == 446 )
 			iy = 6;
 
-		d.clear(0xff000033);
 		if ( mouse.clicked() ) {
 			point2.render(mouse.x(), mouse.y());
 			MessageBox(0,0,0,0);
