@@ -16,7 +16,7 @@ struct renderer
 		//	ix.attenuate(0.05f);
 			iy.increase(0.1f);
 			x += ix;
-			y += (6 - iy);
+			y += iy;
 		}
 	};
 	d3ddev &d;
@@ -74,7 +74,7 @@ struct renderer
 	}
 	void on_clicked(int x, int y)
 	{
-		enemies.push_back(enemy(x, y));
+		enemies.push_back(enemy(x, 0));
 	}
 };
 
