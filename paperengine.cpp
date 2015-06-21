@@ -17,6 +17,7 @@ struct renderer
 	mouse_input &mouse;
 	sprite point1;
 	sprite point2;
+	text   txt1;
 	inertia<-3, 3> ix;
 	inertia<0, 12>  iy;
 	limited<float, 0, 608> x;
@@ -26,9 +27,11 @@ struct renderer
 	renderer(d3ddev &d_in, kb_input &kb_in, mouse_input &mouse_in)
 		: d(d_in), kb(kb_in), mouse(mouse_in),
 		  point1(d, "point.png"),
-		  point2(d, "point2.png")
+		  point2(d, "point2.png"),
+		  txt1(d, 26, "Meiryo")
 	{
 		x = 0; y = 0;
+		txt1 = "Moving on W/A/S/D or Allow key input.";
 	}
 
 	void render()
@@ -57,6 +60,7 @@ struct renderer
 			MessageBox(0,0,0,0);
 		}
 		point1.render(x, 446 - y);
+		txt1.render();
 	}
 };
 

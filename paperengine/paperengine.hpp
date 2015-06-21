@@ -5,7 +5,7 @@
 #include "window.hpp"
 #include "direct3d.hpp"
 #include "d3ddev.hpp"
-#include "d3dfont.hpp"
+#include "text.hpp"
 #include "sprite.hpp"
 #include "input.hpp"
 #include "game/value.hpp"
