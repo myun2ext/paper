@@ -1,5 +1,6 @@
 #include "paperengine/paperengine.hpp"
 #include <vector>
+#include <stdlib.h>
 
 using namespace myun2::paperengine;
 using namespace std;
@@ -74,7 +75,7 @@ struct renderer
 	}
 	void on_clicked(int x, int y)
 	{
-		enemies.push_back(enemy(x, 0));
+		enemies.push_back(enemy(rand() % 640, 0));
 	}
 };
 
