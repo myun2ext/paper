@@ -25,7 +25,7 @@ namespace myun2
 					throw create_failed();
 			}
 			void render(const char* text, D3DCOLOR color =  0xffffffff) {
-				RECT r={0,0,0,0};
+				RECT r={0,-2,0,0};
 				ptr->DrawText(NULL, text, -1, &r, DT_LEFT | DT_NOCLIP, color);
 			}
 			void render(D3DCOLOR color =  0xffffffff) {

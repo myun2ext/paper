@@ -38,7 +38,7 @@ namespace myun2
 
 			app(const char* name, HINSTANCE hinstance, unsigned int width, unsigned int height)
 				: wc((::std::string(name) + "__WindowClass__").c_str()),
-				  w(wc.atom, name, width, height),
+				  w(wc.atom, name, width + 18, height + 42),
 				  hwnd(w.hWnd),
 				  d(d3d, hwnd, width, height),
 				  di(hinstance),
