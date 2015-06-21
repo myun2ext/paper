@@ -22,7 +22,7 @@ namespace myun2
 				if ( FAILED(D3DXCreateSprite(d.ptr, &ptr)) )
 					throw create_failed();;
 			}
-			void render(int left = 0, int top = 0, D3DCOLOR color = 0xFFFFFFFF)
+			void render(int left = 0, int top = 0, float scale = 1.0f, D3DCOLOR color = 0xFFFFFFFF)
 			{
 				RECT rc;
 				D3DXVECTOR3 center , position;
@@ -36,7 +36,11 @@ namespace myun2
 				position.x = left;
 				position.y = top;
 
+				D3DXMATRIX mat_scale;
+				D3DXMatrixScaling(&mat_scale, scale, scale, scale);
+
 				ptr->Begin(0);
+				ptr->SetTransform(&mat_scale);
 				ptr->Draw(tex.ptr, &rc, &center, &position, color);
 				ptr->End();
 			}
