@@ -27,7 +27,7 @@ struct renderer
 	sprite point1;
 	sprite point2;
 	text   txt1;
-	inertia<-3, 3> ix;
+	inertia<-6, 6> ix;
 	inertia<0, 12>  iy;
 	limited<float, 0, 608> x;
 	limited<float, 0, 446> y;
@@ -54,9 +54,9 @@ struct renderer
 	{
     	ix.attenuate(0.05f);
 		if ( kb.test(DIK_LEFT) || kb.test(DIK_A) )
-			ix.increase(-0.12f);
+			ix.increase(-0.14f);
 		if ( kb.test(DIK_RIGHT) || kb.test(DIK_D) )
-			ix.increase(0.12f);
+			ix.increase(0.14f);
 		x += ix;
 
 		iy.attenuate(0.1f);
@@ -74,7 +74,7 @@ struct renderer
 		if ( time == 0 ) {
 			enemies.push_back(enemy(rand() % 620, 0));
 			score++;
-			if ( level < 105 && (level_n++ % 1) == 0 ) level++;
+			if ( level < 110 && (level_n++ % 1) == 0 ) level++;
 		}
 		time = (time + 1) % (120 - level);
 
@@ -83,14 +83,14 @@ struct renderer
 		for(int ei=0; ei<enemies.size(); ei++)
 		{
 			enemy &e = enemies[ei];
-			if (x  > e.x - 27 && x  < e.x + 27 &&
-			    yy > e.y - 27 && yy < e.y + 27)
+			if (x  > e.x - 30 && x  < e.x + 30 &&
+			    yy > e.y - 24 && yy < e.y + 24)
 			{
 				char gameover_text[256];
 				sprintf(gameover_text, "Gameover!! Level:%d, Score:%d", level, score);
 				MessageBox(NULL, gameover_text, "Gameover", 0);
-				sprintf(gameover_text, "%d, %d", (int)yy, (int)e.y);
-				MessageBox(NULL, gameover_text, "Gameover", 0);
+				//sprintf(gameover_text, "%d, %d", (int)yy, (int)e.y);
+				//MessageBox(NULL, gameover_text, "Gameover", 0);
 				PostQuitMessage(0);
 			}
 			point2.render(e.x, e.y);
