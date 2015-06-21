@@ -84,6 +84,13 @@ struct renderer
 			enemy &e = enemies[ei];
 			point2.render(e.x, e.y);
 			e.next();
+			if (e.x - 20 > x && x < e.x + 20)
+			{
+				char gameover_text[256];
+				sprintf(gameover_text, "Gameover!! Level:%d, Score:%d", level, score);
+				MessageBox(NULL, gameover_text, "Gameover", 0);
+				PostQuitMessage(0);
+			}
 		}
 		point1.render(x, 446 - y);
 
