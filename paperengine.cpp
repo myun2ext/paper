@@ -8,13 +8,15 @@ struct renderer
 {
 	struct enemy {
 		inertia<-3, 3> ix;
-		inertia<0, 12>  iy;
+		inertia<0, 12> iy;
 		limited<float, -20, 640> x;
 		limited<float, -20, 480> y;
 		enemy(int x_, int y_) : x(x_), y(y_) {}
 		void next() {
-	    	ix.attenuate(0.05f);
-			iy.attenuate(0.1f);
+		//	ix.attenuate(0.05f);
+			iy.increase(0.1f);
+			x += ix;
+			y += (6 - iy);
 		}
 	};
 	d3ddev &d;
@@ -36,7 +38,7 @@ struct renderer
 		  txt1(d, 26, "Meiryo")
 	{
 		x = 0; y = 0;
-		txt1 = "W/A/S/D で移動";
+		txt1 = "W/A/S/D で移動, クリックで何かが出る";
 	}
 	void render()
 
