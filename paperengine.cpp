@@ -79,20 +79,24 @@ struct renderer
 		time = (time + 1) % (120 - level);
 
 		//	Render enemies
+		int yy = 446 - y;
 		for(int ei=0; ei<enemies.size(); ei++)
 		{
 			enemy &e = enemies[ei];
-			point2.render(e.x, e.y);
-			e.next();
-			if (e.x - 20 > x && x < e.x + 20)
+			if (x  > e.x - 27 && x  < e.x + 27 &&
+			    yy > e.y - 27 && yy < e.y + 27)
 			{
 				char gameover_text[256];
 				sprintf(gameover_text, "Gameover!! Level:%d, Score:%d", level, score);
 				MessageBox(NULL, gameover_text, "Gameover", 0);
+				sprintf(gameover_text, "%d, %d", (int)yy, (int)e.y);
+				MessageBox(NULL, gameover_text, "Gameover", 0);
 				PostQuitMessage(0);
 			}
+			point2.render(e.x, e.y);
+			e.next();
 		}
-		point1.render(x, 446 - y);
+		point1.render(x, yy);
 
 		char text_buff[256];
 		sprintf(text_buff, "W/A/S/D で移動, Level:%d, Score:%d", level, score);
