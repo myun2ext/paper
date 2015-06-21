@@ -34,6 +34,7 @@ struct renderer
 //	list<enemy>::iterator enemy_iterator;
 	int time;
 	int level;
+	int level_n;
 
 	renderer(d3ddev &d_in, kb_input &kb_in, mouse_input &mouse_in)
 		: d(d_in), kb(kb_in), mouse(mouse_in),
@@ -45,6 +46,7 @@ struct renderer
 		txt1 = "W/A/S/D で移動, クリックで何かが出る";
 		time = 0;
 		level = 0;
+		level_n = 0;
 	}
 	void render()
 	{
@@ -67,9 +69,11 @@ struct renderer
 		if ( y == 446 )
 			iy = 6;
 
-		if ( time == 0 )
+		if ( time == 0 ) {
 			enemies.push_back(enemy(rand() % 620, 0));
-		time = (time + 1) % (2 - level);
+			if ( level < 10 && (level_n++ % 100) == 0 ) level++;
+		}
+		time = (time + 1) % (14 - level);
 
 		//	Render enemies
 		for(int ei=0; ei<enemies.size(); ei++)
