@@ -23,6 +23,7 @@ struct renderer
 	limited<float, 0, 608> x;
 	limited<float, 0, 446> y;
 	vector<enemy> enemies;
+	int clickedx, clickedy;
 
 	renderer(d3ddev &d_in, kb_input &kb_in, mouse_input &mouse_in)
 		: d(d_in), kb(kb_in), mouse(mouse_in),
@@ -36,7 +37,8 @@ struct renderer
 
 	void render()
 	{
-		ix.attenuate(0.05f);
+
+    	ix.attenuate(0.05f);
 		if ( kb.test(DIK_LEFT) || kb.test(DIK_A) )
 			ix.increase(-0.12f);
 		if ( kb.test(DIK_RIGHT) || kb.test(DIK_D) )
@@ -55,12 +57,18 @@ struct renderer
 		if ( y == 446 )
 			iy = 6;
 
-		if ( mouse.clicked() ) {
-			point2.render(mouse.x(), mouse.y());
-			MessageBox(0,0,0,0);
-		}
+		//if ( mouse.clicked() ) {
+			//point2.render(mouse.x(), mouse.y());
+			point2.render(clickedx, clickedy);
+		//	MessageBox(0,0,0,0);
+		//}
 		point1.render(x, 446 - y);
 		txt1.render();
+	}
+	void on_clicked(int x, int y)
+	{
+		clickedx = x;
+		clickedy = y;
 	}
 };
 

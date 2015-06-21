@@ -54,6 +54,9 @@ namespace myun2
 				do
 				{
 					if ( PeekMessage(&msg, NULL, 0, 0, PM_REMOVE) ) {
+						if ( msg.message == WM_LBUTTONDOWN ) {
+							r.on_clicked(msg.lParam & 0xFFFF, (msg.lParam >> 16) & 0xFFFF);
+						}
 						TranslateMessage( &msg );
 						DispatchMessage( &msg );
 					}
