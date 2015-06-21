@@ -31,6 +31,9 @@ struct renderer
 	limited<float, 0, 608> x;
 	limited<float, 0, 446> y;
 	vector<enemy> enemies;
+//	list<enemy>::iterator enemy_iterator;
+	int time;
+	int level;
 
 	renderer(d3ddev &d_in, kb_input &kb_in, mouse_input &mouse_in)
 		: d(d_in), kb(kb_in), mouse(mouse_in),
@@ -40,9 +43,10 @@ struct renderer
 	{
 		x = 0; y = 0;
 		txt1 = "W/A/S/D で移動, クリックで何かが出る";
+		time = 0;
+		level = 0;
 	}
 	void render()
-
 	{
     	ix.attenuate(0.05f);
 		if ( kb.test(DIK_LEFT) || kb.test(DIK_A) )
@@ -63,8 +67,12 @@ struct renderer
 		if ( y == 446 )
 			iy = 6;
 
+		if ( time == 0 )
+			enemies.push_back(enemy(rand() % 620, 0));
+		time = (time + 1) % (2 - level);
+
 		//	Render enemies
-		for (int ei=0; ei<enemies.size(); ei++)
+		for(int ei=0; ei<enemies.size(); ei++)
 		{
 			enemy &e = enemies[ei];
 			point2.render(e.x, e.y);
@@ -73,10 +81,7 @@ struct renderer
 		point1.render(x, 446 - y);
 		txt1.render();
 	}
-	void on_clicked(int x, int y)
-	{
-		enemies.push_back(enemy(rand() % 640, 0));
-	}
+	void on_clicked(int x, int y){}
 };
 
 RUN_PAPERENGINE("Test", 640, 480, renderer)
