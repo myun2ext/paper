@@ -31,7 +31,7 @@ struct renderer
 		  txt1(d, 26, "Meiryo")
 	{
 		x = 0; y = 0;
-		txt1 = "Moving on W/A/S/D or Allow key input.";
+		txt1 = "W/A/S/D キーで移動が出来ます。";
 	}
 
 	void render()
@@ -64,4 +64,4 @@ struct renderer
 	}
 };
 
-RUN_PAPERENGINE("Paperengine", 640, 480, renderer)
+RUN_PAPERENGINE("Test", 640, 480, renderer)
