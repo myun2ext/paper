@@ -1,5 +1,6 @@
 #include "paperengine/paperengine.hpp"
 #include <vector>
+#include <stdio.h>
 #include <stdlib.h>
 
 using namespace myun2::paperengine;
@@ -35,6 +36,7 @@ struct renderer
 	int time;
 	int level;
 	int level_n;
+	int score;
 
 	renderer(d3ddev &d_in, kb_input &kb_in, mouse_input &mouse_in)
 		: d(d_in), kb(kb_in), mouse(mouse_in),
@@ -43,10 +45,10 @@ struct renderer
 		  txt1(d, 26, "Meiryo")
 	{
 		x = 0; y = 0;
-		txt1 = "W/A/S/D で移動, クリックで何かが出る";
 		time = 0;
 		level = 0;
 		level_n = 0;
+		score = 0;
 	}
 	void render()
 	{
@@ -71,9 +73,10 @@ struct renderer
 
 		if ( time == 0 ) {
 			enemies.push_back(enemy(rand() % 620, 0));
-			if ( level < 10 && (level_n++ % 100) == 0 ) level++;
+			score++;
+			if ( level < 105 && (level_n++ % 1) == 0 ) level++;
 		}
-		time = (time + 1) % (14 - level);
+		time = (time + 1) % (120 - level);
 
 		//	Render enemies
 		for(int ei=0; ei<enemies.size(); ei++)
@@ -83,6 +86,10 @@ struct renderer
 			e.next();
 		}
 		point1.render(x, 446 - y);
+
+		char text_buff[256];
+		sprintf(text_buff, "W/A/S/D で移動, Level:%d, Score:%d", level, score);
+		txt1 = text_buff;
 		txt1.render();
 	}
 	void on_clicked(int x, int y){}
