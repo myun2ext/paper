@@ -8,6 +8,7 @@
 #include "text.hpp"
 #include "sprite.hpp"
 #include "input.hpp"
+#include "dsound.hpp"
 #include "game/value.hpp"
 #include <string>
 
@@ -34,11 +35,12 @@ namespace myun2
 			dinput di;
 			kb_input kb;
 			mouse_input mouse;
+			dsound snd;
 			_Renderer r;
 
 			app(const char* name, HINSTANCE hinstance, unsigned int width, unsigned int height)
 				: wc((::std::string(name) + "__WindowClass__").c_str()),
-				  w(wc.atom, name, width + 18, height + 42),
+				  w(wc.atom, name, width + 16, height + 38),
 				  hwnd(w.hWnd),
 				  d(d3d, hwnd, width, height),
 				  di(hinstance),
